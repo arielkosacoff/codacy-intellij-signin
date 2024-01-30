@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codacy Token Input</title>
+</head>
+<body>
+    <h1>Set Codacy Token</h1>
+    <small>You have 10 minutes to do it</small>
+    <p>Enter your Codacy Token:</p>
+    <input type="text" id="codacyTokenInput" placeholder="Enter your Codacy Token">
+    <button id="submitButton">Submit</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const codacyTokenInput = document.getElementById("codacyTokenInput");
+            const submitButton = document.getElementById("submitButton");
+
+            function getQueryParam(param) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
+
+            const redirectUrl = getQueryParam("redirectUrl");
+
+            submitButton.addEventListener("click", function() {
+                const codacyToken = codacyTokenInput.value;
+
+                if (codacyToken.trim() !== "") {
+                    const customSchemeURL = redirectUrl + encodeURIComponent(codacyToken);
+                    window.location.href = customSchemeURL;
+                } else {
+                    alert("Please enter a valid Codacy Token.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
